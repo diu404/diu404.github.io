@@ -3,12 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>404</title>
+<title>diu404</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link href="" rel="stylesheet">
 </head>
 <body>
-    hello word!
+    <div id="content"></div>
 </body>
+<script src="plugins/jquery.min.js"></script>
+<script src="plugins/marked.min.js"></script>
+<script>
+    const directoryPath = './_md'; // 替换为目标目录的路径
+    var fileNames = new Array();
+
+    $.ajax({
+        url: directoryPath, //目标目录路径
+        success: function (data) {
+            $(data).find("a:contains(.md)").each(function () {
+                let tmp = $(this).attr("href");
+                let idx = tmp.lastIndexOf('/');
+                tmp = tmp.slice(idx + 1, tmp.length);
+                fileNames.push(tmp);
+            });
+
+            var reg = /.*(?=\.md)/;
+
+            fileNames.sort((x, y) => { //对文件名进行排序
+                x = x.match(reg)[0];
+                y = y.match(reg)[0];
+                return parseInt(x) - parseInt(y);
+            })
+        }});
+
+
+    $(function (){
+        $.ajax({
+            url: '_md/test.md',
+            type: 'GET',
+            dataType: 'text',
+            cache: false,
+            success: function(md) {
+                console.log(md);
+                let mdHtml = marked.parse(md);
+                $('#content').html(mdHtml);
+            }
+        });
+    })
+</script>
 </html>
