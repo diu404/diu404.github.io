@@ -14,27 +14,27 @@
 <script src="plugins/jquery.min.js"></script>
 <script src="plugins/marked.min.js"></script>
 <script>
-    const directoryPath = './_md'; // 替换为目标目录的路径
-    var fileNames = new Array();
-
-    $.ajax({
-        url: directoryPath, //目标目录路径
-        success: function (data) {
-            $(data).find("a:contains(.md)").each(function () {
-                let tmp = $(this).attr("href");
-                let idx = tmp.lastIndexOf('/');
-                tmp = tmp.slice(idx + 1, tmp.length);
-                fileNames.push(tmp);
-            });
-
-            var reg = /.*(?=\.md)/;
-
-            fileNames.sort((x, y) => { //对文件名进行排序
-                x = x.match(reg)[0];
-                y = y.match(reg)[0];
-                return parseInt(x) - parseInt(y);
-            })
-        }});
+    // const directoryPath = './_md'; // 替换为目标目录的路径
+    // var fileNames = new Array();
+    //
+    // $.ajax({
+    //     url: directoryPath, //目标目录路径
+    //     success: function (data) {
+    //         $(data).find("a:contains(.md)").each(function () {
+    //             let tmp = $(this).attr("href");
+    //             let idx = tmp.lastIndexOf('/');
+    //             tmp = tmp.slice(idx + 1, tmp.length);
+    //             fileNames.push(tmp);
+    //         });
+    //
+    //         var reg = /.*(?=\.md)/;
+    //
+    //         fileNames.sort((x, y) => { //对文件名进行排序
+    //             x = x.match(reg)[0];
+    //             y = y.match(reg)[0];
+    //             return parseInt(x) - parseInt(y);
+    //         })
+    //     }});
 
 
     $(function (){
