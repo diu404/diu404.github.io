@@ -1,5 +1,4 @@
-[<返回](../index.html)
-![](../images/banner.png "测试图片")
+[![](../images/banner.png "首页")](https://diu404.github.io)
 
 #### 这是标题
 1. 这是标签1
