@@ -1,6 +1,4 @@
-<h3 style="text-align: center">
-hello word!
-</h3>
-测试链接[link](https://diu404.github.io/blog/test.html).
-
-![](https://diu404.github.io/images/header.JPG "测试图片")
+<h3 style="text-align: center">diu404</h3>
+![](images/banner.png "测试图片")
+***
+1. [测试链接](blog/test.html).
