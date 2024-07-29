@@ -1076,10 +1076,42 @@ body .markdown-body
 .highlight .vi{color:teal}
 .highlight .il{color:#009999}
 .highlight .gc{color:#999;background-color:#EAF2F5}
-</style><title>index</title></head><body><article class="markdown-body"><p><a href="https://diu404.github.io"><img alt="diu404" src="images/banner.png" title="diu404" /></a></p>
-<hr />
-<ol>
-<li><a href="blog/test.html">测试链接</a>.</li>
-<li><a href="blog/docker-role.html">docker内部无权限</a>.</li>
-<li><a href="blog/springboot.html">spingboot获取配置属性</a></li>
-</ol></article></body></html>
+</style><title>springboot</title></head><body><article class="markdown-body"><p><a href="https://diu404.github.io"><img alt="" src="../images/banner.png" title="首页" /></a></p>
+<h4 id="spingboot">spingboot获取配置属性<a class="headerlink" href="#spingboot" title="Permanent link"></a></h4>
+<p>eg:application.properties
+<div class="highlight"><pre>author.str=测试
+author.map0[k00]=v00
+author.map0[k01]=v01
+author.map1={\
+   &quot;k10&quot;:&quot;v10&quot;\
+  ,&quot;k11&quot;:&quot;v11&quot;\
+  }
+author.lst0[0]=lst00
+author.lst0[1]=lst01
+author.lst1=lst10,lst11
+author.lst2=lst20,lst21
+author.lst3=lst30,lst31
+</pre></div>
+Author.java
+<div class="highlight"><pre>@Component
+@ConfigurationProperties(&quot;author&quot;)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+public class Author {
+    private String str;
+    private Map&lt;String,String&gt; map0=new HashMap&lt;&gt;();
+    private List&lt;String&gt; lst0=new ArrayList&lt;&gt;();
+    private List&lt;String&gt; lst1=new ArrayList&lt;&gt;();
+}
+/
+    @Value(&quot;#{${author.map1}}&quot;)
+    private Map&lt;String,String&gt; map1;
+    @Value(&quot;${author.lst2:}&quot;)
+    private List&lt;String&gt; lst2;
+    @Value(&quot;#{&#39;${author.lst3}&#39;.split(&#39;\\,&#39;,-1)}&quot;)
+    private List&lt;String&gt; lst3;
+</pre></div></p></article></body></html>
