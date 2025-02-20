@@ -1,5 +1,5 @@
 [![](../images/banner.png "首页")](https://diu404.github.io)
-####.maven打包使用外部lib
+#### maven打包使用外部lib
 ```
 	<!--java -Dloader.path=./lib -jar test-0.0.1-SNAPSHOT.jar-->
 	<build>
