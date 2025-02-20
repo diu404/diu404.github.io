@@ -1076,11 +1076,43 @@ body .markdown-body
 .highlight .vi{color:teal}
 .highlight .il{color:#009999}
 .highlight .gc{color:#999;background-color:#EAF2F5}
-</style><title>index</title></head><body><article class="markdown-body"><p><a href="https://diu404.github.io"><img alt="diu404" src="images/banner.png" title="diu404" /></a></p>
-<hr />
-<ol>
-<li><a href="blog/test.html">测试链接</a>.</li>
-<li><a href="blog/docker-role.html">docker内部无权限</a>.</li>
-<li><a href="blog/springboot.html">spingboot获取配置属性</a>.</li>
-<li><a href="blog/maven.html">maven打包使用外部lib</a>.</li>
-</ol></article></body></html>
+</style><title>maven</title></head><body><article class="markdown-body"><p><a href="https://diu404.github.io"><img alt="" src="../images/banner.png" title="首页" /></a></p>
+<h4 id="mavenlib">.maven打包使用外部lib<a class="headerlink" href="#mavenlib" title="Permanent link"></a></h4>
+<div class="highlight"><pre>    &lt;!--java -Dloader.path=./lib -jar test-0.0.1-SNAPSHOT.jar--&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                    &lt;executable&gt;true&lt;/executable&gt;
+                    &lt;layout&gt;ZIP&lt;/layout&gt;
+                    &lt;includes&gt;
+                        &lt;include&gt;
+                            &lt;groupId&gt;nothing&lt;/groupId&gt;
+                            &lt;artifactId&gt;nothing&lt;/artifactId&gt;
+                        &lt;/include&gt;
+                    &lt;/includes&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;copy&lt;/id&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;copy-dependencies&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;outputDirectory&gt;
+                                ${project.build.directory}/lib
+                            &lt;/outputDirectory&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+</pre></div></article></body></html>
